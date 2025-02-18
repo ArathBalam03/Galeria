@@ -2,8 +2,12 @@ document.getElementById("formulario").addEventListener("submit", function(event)
     event.preventDefault();
     const url = document.getElementById("urlImagen").value;
     const desc = document.getElementById("descripcion").value;
-    agregarImagen(url, desc);
-    document.getElementById("formulario").reset();
+    if (validarURL(url)) {
+        agregarImagen(url, desc);
+        document.getElementById("formulario").reset();
+    } else {
+        alert("URL inválida. Por favor, introduce una URL válida de imagen.");
+    }
 });
 
 function agregarImagen(url, descripcion) {
@@ -27,4 +31,8 @@ function cambiarDescripcion(parrafo) {
     if (nuevaDesc) {
         parrafo.textContent = nuevaDesc;
     }
+}
+
+function validarURL(url) {
+    return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
 }
